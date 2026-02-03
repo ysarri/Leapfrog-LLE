@@ -21,7 +21,7 @@ python lle_3_2_leapfrog.py
 ## What It Does
 
 Simulates the Lugiato-Lefever equation:
-$$\frac{\partial A}{\partial t} = -(1 - i\delta)A - i|A|^2 A + s$$
+$$\frac{\partial A}{\partial t} = -(1 - i\delta)A + i\frac{\partial^2 A}{\partial x^2} - i|A|^2 A  + s$$
 
 - **A**: Complex field envelope
 - **δ (delta)**: Detuning parameter
