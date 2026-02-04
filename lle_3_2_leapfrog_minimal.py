@@ -3,7 +3,7 @@
 Minimal version requiring only numpy and matplotlib.
 
 This module simulates the normalized Lugiato-Lefever equation with pump:
-    dA/dt = -(1 - i*delta)*A - i*|A|^2*A +id^2/dx^2A + s
+    dA/dt = -(1 - i*delta)*A - i*|A|^2*A + id^2/dx^2A + s
 
 Where:
     - A: complex field envelope
@@ -290,3 +290,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
