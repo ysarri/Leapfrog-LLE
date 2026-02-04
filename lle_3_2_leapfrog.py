@@ -20,7 +20,7 @@ from mkl_fft import fft, ifft
 from tqdm import tqdm
 import scienceplots
 
-plt.style.use("science")
+plt.style.use(["science", 'no-latex'])
 
 
 @njit(fastmath=True, cache=True)
@@ -288,4 +288,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
