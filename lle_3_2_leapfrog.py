@@ -1,7 +1,7 @@
 """Lugiato-Lefever Equation (LLE) Solver using Leapfrog Method.
 
 This module simulates the normalized Lugiato-Lefever equation with pump:
-    dA/dt = -(1 - i*delta)*A - i*|A|^2*A + s
+    dA/dt = -(1 - i*delta)*A - i*|A|^2*A +id^2/dx^2A + s
 
 Where:
     - A: complex field envelope
@@ -39,7 +39,7 @@ def func(A: np.ndarray, s: float) -> np.ndarray:
 
 @njit(fastmath=True, cache=True)
 def calc_disp_lf(qx2: np.ndarray, delta: float, h: float) -> tuple:
-    """Calculate dispersion matrices for leapfrog integration.
+    """Calculate dispersion operator for leapfrog integration.
 
     Args:
         qx2: Squared frequency array (-i*q^2/2)
@@ -288,3 +288,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
