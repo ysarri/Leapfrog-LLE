@@ -125,6 +125,11 @@ def loop(
     # Initial condition: sech soliton profile
     A1 = np.sqrt(2 * np.abs(delta)) / np.cosh(np.sqrt(np.abs(delta)) * x)
 
+    # noise level (eg: 0.01 -> 1%)
+    noise_level = 0.1 
+    noise = noise_level * (np.random.randn(n) + 1j * np.random.randn(n))
+    A1 = A1 + noise
+
     # Storage for trajectory
     A_ring = np.zeros((rt // nt, n), dtype=np.complex128)
 
@@ -208,7 +213,7 @@ def _plot_results(
     ax3 = fig.add_subplot(2, 2, 3)
     sp = np.fft.fftshift(np.fft.fft(final_field))
     spectrum_normalized = np.abs(sp / sp.max()) ** 2
-    spp = 10 * np.log10(np.clip(spectrum_normalized, 1e-10, 1.0))
+    spp = 10 * np.log10(np.clip(spectrum_normalized, 1e-50, 1.0))
     plt.plot(np.fft.fftshift(qx), spp, linewidth=1.5, color="C1")
     plt.ylabel(r"$\mathrm{Spectrum~(dB)}$")
     plt.xlabel(r"$\mathrm{Frequencies}$")
