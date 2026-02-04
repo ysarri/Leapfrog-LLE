@@ -219,7 +219,7 @@ def _plot_results(
     ax3 = fig.add_subplot(2, 2, 3)
     sp = np.fft.fftshift(np.fft.fft(final_field))
     spectrum_normalized = np.abs(sp / sp.max()) ** 2
-    spp = 10 * np.log10(np.clip(spectrum_normalized, 1e-50, 1.0))
+    spp = 10 * np.log10(np.clip(spectrum_normalized, 1e-20, 1.0))
     plt.plot(np.fft.fftshift(qx), spp, linewidth=1.5, color="C1")
     plt.ylabel(r"$\mathrm{Spectrum~(dB)}$")
     plt.xlabel(r"$\mathrm{Frequencies}$")
@@ -248,13 +248,13 @@ def main() -> None:
     n_points = 2**10  # Number of spatial points
     time_step = 1e-2  # Integration time step
     domain_half = 40  # Half spatial domain width
-    n_save = 10  # Save every n_save round trips
     n_roundtrips = 1000  # Total round trips
-    delta = 3.0  # Detuning parameter
-    pump = 2.0  # Pump strength
+    n_save = n_roundtrips//100  # Save every n_save round trips
+    delta = 3  # Detuning parameter
+    pump = 2  # Pump strength
     method = "lf"  # Integration method
 
-    # Run simulation
+    # Run simulation)
     print("\n" + "=" * 60)
     print("Lugiato-Lefever Equation Solver - Leapfrog Method")
     print("=" * 60)
