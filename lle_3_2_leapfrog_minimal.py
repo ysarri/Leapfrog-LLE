@@ -3,12 +3,15 @@
 Minimal version requiring only numpy and matplotlib.
 
 This module simulates the normalized Lugiato-Lefever equation with pump:
-    dA/dt = -(1 - i*delta)*A - i*|A|^2*A + s
+    dA/dt = -(1 - i*delta)*A - i*|A|^2*A +id^2/dx^2A + s
 
 Where:
     - A: complex field envelope
     - s: pump strength
     - delta: detuning parameter
+
+03/02/2026 Jesús Yelo-Sarrión
+
 """
 
 import numpy as np
@@ -213,7 +216,7 @@ def _plot_results(
     ax3 = fig.add_subplot(2, 2, 3)
     sp = np.fft.fftshift(np.fft.fft(final_field))
     spectrum_normalized = np.abs(sp / sp.max()) ** 2
-    spp = 10 * np.log10(np.clip(spectrum_normalized, 1e-50, 1.0))
+    spp = 10 * np.log10(np.clip(spectrum_normalized, 1e-20, 1.0))
     plt.plot(np.fft.fftshift(qx), spp, linewidth=1.5, color="C1")
     plt.ylabel(r"$\mathrm{Spectrum~(dB)}$")
     plt.xlabel(r"$\mathrm{Frequencies}$")
@@ -242,8 +245,8 @@ def main() -> None:
     n_points = 2**10  # Number of spatial points
     time_step = 1e-2  # Integration time step
     domain_half = 40  # Half spatial domain width
-    n_save = 10  # Save every n_save round trips
     n_roundtrips = 1000  # Total round trips
+    n_save = n_roundtrips//100  # Save every n_save round trips
     delta = 3.0  # Detuning parameter
     pump = 2.0  # Pump strength
     method = "lf"  # Integration method
